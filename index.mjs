@@ -23,17 +23,23 @@ redis.get('mykey1').then((result) => {
   console.log(result); // Prints "value"
 });
 
-redis.set('mykey2', 'hello', 'EX', 10);
+redis.set('mykey2', 'hello', 'EX', 3);
 setTimeout(() => {
   redis.get('mykey2').then((result) => {
     console.log(result); // Prints "value"
   });
-}, 15 * 1000);
+}, 4 * 1000);
 
-///////////////
-// if (redis) {
-//   redis.disconnect();
-// }
-// if (redisServer) {
-//   await redisServer.stop();
-// }
+redis.zadd('sortedSet', 1, 'one', 2, 'dos', 4, 'quatro', 3, 'three');
+redis.zrange('sortedSet', 0, 2, 'WITHSCORES').then((elements) => {
+  console.log(elements);
+});
+
+setTimeout(async () => {
+  if (redis) {
+    redis.disconnect();
+  }
+  if (redisServer) {
+    await redisServer.stop();
+  }
+}, 5 * 1000);

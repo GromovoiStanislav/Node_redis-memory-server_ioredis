@@ -9,6 +9,9 @@ const redis = new Redis({
   port,
 });
 
+redis.rpush('mylist', [1, 2, 3]);
+console.log(await redis.lrange('mylist', 0, -1));
+
 redis.set('mykey1', 'value');
 
 redis.get('mykey1', (err, result) => {

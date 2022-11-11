@@ -9,9 +9,6 @@ const redis = new Redis({
   port,
 });
 
-redis.rpush('mylist', [1, 2, 3]);
-console.log(await redis.lrange('mylist', 0, -1));
-
 redis.set('mykey1', 'value');
 
 redis.get('mykey1', (err, result) => {
@@ -40,6 +37,10 @@ setTimeout(() => {
 redis.get('mykey2').then((result) => {
   console.log('mykey2', result); // Prints "hello"
 });
+
+//Список
+redis.rpush('mylist', [1, 2, 3]);
+console.log(await redis.lrange('mylist', 0, -1));
 
 //Сортированный список
 redis.zadd('sortedSet', 1, 'one', 2, 'dos', 4, 'quatro', 3, 'three');

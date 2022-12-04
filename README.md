@@ -1,7 +1,7 @@
-## ExpressJS with RedisMemoryServer and ioredis
+## ExpressJS with Redis In-Memory Server and ioredis
 
 - ExpressJS
-- RedisMemoryServer
+- redis-memory-server
 - ioredis
 
 

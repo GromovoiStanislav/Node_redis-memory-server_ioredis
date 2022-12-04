@@ -38,10 +38,6 @@ redis.get('mykey2').then((result) => {
   console.log('mykey2', result); // Prints "hello"
 });
 
-//Список
-redis.rpush('mylist', [1, 2, 3]);
-console.log(await redis.lrange('mylist', 0, -1));
-
 //Сортированный список
 redis.zadd('sortedSet', 1, 'one', 2, 'dos', 4, 'quatro', 3, 'three');
 redis.zrange('sortedSet', 0, 2, 'WITHSCORES').then((elements) => {
@@ -122,7 +118,12 @@ redis.get('mykey3').then((result) => {
 //Exit
 setTimeout(async () => {
   if (redis) {
-    redis.disconnect();
+
+   //await client.flushall(); //Очистка ВСЕХ данных
+   await client.flushdb(); //Очистка ВСЕХ данных
+
+   //await client.disconnect();
+   await client.quit();
   }
   if (redisServer) {
     await redisServer.stop();
